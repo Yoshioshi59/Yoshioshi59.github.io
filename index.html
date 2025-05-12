@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Button Chain</title>
+    <style>
+        body {
+            background-color: black;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        button {
+            position: absolute;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <button id="mainButton" onclick="createButton(this)">Click me</button>
+
+    <script>
+        let count = 1;
+
+        function createButton(clickedButton) {
+            if (count < 7) {
+                const newButton = document.createElement('button');
+                newButton.textContent = 'Click me';
+                newButton.style.left = `${Math.random() * 80 + 10}%`;
+                newButton.style.top = `${Math.random() * 80 + 10}%`;
+                newButton.onclick = function() { createButton(this) };
+                document.body.appendChild(newButton);
+                count++;
+            } else {
+                const message = document.createElement('div');
+                message.textContent = '🖕 🖕🏿';
+                message.style.color = 'white';
+                message.style.fontSize = '360px';
+                message.style.position = 'absolute';
+                document.body.innerHTML = '';
+                document.body.appendChild(message);
+            }
+            clickedButton.remove();
+        }
+    </script>
+</body>
+</html>
